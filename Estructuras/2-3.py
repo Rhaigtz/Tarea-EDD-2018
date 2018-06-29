@@ -23,7 +23,10 @@ class Node:
                     self.data[j], self.data[x] = self.data[x], self.data[j]
         self.child.extend(new_node.child)
         if len(self.child) > 1:
-        	self.child.sort()
+                for x in range(0, len(self.child)):
+                    for j in range(x+1, len(self.child)):
+                        if self.child[j].apellido > self.child[x].value.apellido:
+                            self.child[j], self.child[x] = self.child[x], self.child[j]
         if len(self.data) > 2:
             self._split()
 

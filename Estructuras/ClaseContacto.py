@@ -7,7 +7,7 @@ class Contacto:
         self.mail = mail
 
     def Imprimir(self):
-        print("\t Nombre : ", nombre)
-        print("\t Apellido : ", apellido)
-        print("\t Telefono : ", telefono)
-        print("\t mail : ", mail)
+        print("\t Nombre : ", self.nombre)
+        print("\t Apellido : ", self.apellido)
+        print("\t Telefono : ", self.telefono)
+        print("\t mail : ", self.mail)

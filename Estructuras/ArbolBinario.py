@@ -180,6 +180,19 @@ class ABB:
             while current.right is not None:
                 current = current.right
             return current
+
+    def agregarContacto(self):
+        print("Agregar nombre: ")
+        nombre = input()
+        print("Agregar apellido: ")
+        apellido = input()
+        print("Agregar telefono: ")
+        telefono = input()
+        print("Agregar email: ")
+        email = input()
+        nuevo = Contacto(nombre, apellido, telefono, email)
+        return self.insert(nuevo)
+
 if __name__=="__main__":
     contacto = Contacto("Nicolas", "Opazo", 4319413, "dasads")
     contacto2 = Contacto("Luis","Apaza",41242112,"dasdsa")

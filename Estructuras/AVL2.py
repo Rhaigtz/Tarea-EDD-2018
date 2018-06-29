@@ -128,10 +128,10 @@ class AVLTree():
         else:
             self.balance = 0
 
-    def delete(self, key):
+    def delete(self, apellido):
         # debug("Trying to delete at node: " + str(self.node.key))
         if self.node != None:
-            if self.node.key == key:
+            if self.node.key.apellido == apellido:
                 debug("Deleting ... " + str(key.apellido))
                 if self.node.left.node == None and self.node.right.node == None:
                     self.node = None  # leaves can be killed at will
@@ -150,7 +150,7 @@ class AVLTree():
                         self.node.key = replacement.key
 
                         # replaced. Now delete the key from right child
-                        self.node.right.delete(replacement.key)
+                        self.node.right.delete(replacement.key.apellido)
 
                 self.rebalance()
                 return
@@ -226,6 +226,17 @@ class AVLTree():
                 print("Nombre:  {} Apellido: {} Numero: {} y Email: {} ".format(
                     nodo.key.nombre, nodo.key.apellido, nodo.key.telefono, nodo.key.mail))
                 self.pre_order(nodo.right.node)
+    def agregarContacto(self):
+        print("Agregar nombre: ")
+        nombre = input()
+        print("Agregar apellido: ")
+        apellido = input()
+        print("Agregar telefono: ")
+        telefono = input()
+        print("Agregar email: ")
+        email = input()
+        nuevo = Contacto(nombre, apellido, telefono, email)
+        return self.insert(nuevo)
 
 
 if __name__ == "__main__":

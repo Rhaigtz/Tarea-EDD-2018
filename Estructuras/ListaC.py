@@ -20,6 +20,8 @@ class List:
         while aux.next_node:
             if aux.next_node.data.apellido == apellido:
                 aux.next_node = aux.next_node.next_node
+                print("Contacto Eliminado con exito")
+                break
             aux = aux.next_node
 
 
@@ -65,7 +67,8 @@ class List:
             temp = self.head
             i = 1
             while temp:
-                print("Nodo {} contiene el nombre {} apellido {} numero {} y mail {} ".format(i, temp.data.nombre,temp.data.apellido,temp.data.telefono,temp.data.mail))
+                print("El Nodo numero {} contiene el contacto".format(i))
+                print(temp.data.Imprimir())
                 temp = temp.next_node
                 i += 1
 
@@ -81,4 +84,17 @@ class List:
         nuevo = Contacto(nombre, apellido, telefono, email)
         return self.sortedInsert(nuevo)
 
-    
+    def borrarContacto(self):
+        print("Ingrese el Apellido del contacto que desea eliminar:")
+        apellido = input()
+if __name__ == "__main__":
+
+    contacto = Contacto("Nicolas", "Opazo", 4319413, "dasads")
+    contacto2 = Contacto("Luis", "Apaza", 41242112, "dasdsa")
+    contacto3 = Contacto("rodrigo", "villanueva", 4321431, "fdsafadfa")
+    contacto5 = Contacto("dassjkkj", "Gonzales", 214414, "faskjfs")
+    contacto6 = Contacto("Bastian", "Navarro", 243894231, "dsakjdsa")
+    lista=List()
+    lista.sortedInsert(contacto)
+    lista.sortedInsert(contacto2)
+    lista.borrar("Opazo")
