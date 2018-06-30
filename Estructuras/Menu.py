@@ -2,6 +2,7 @@ from ListaC import *
 from ArbolBinario import *
 from AVL2 import *
 from faker import Faker
+from time import time
 class Menu:
     def __init__(self):
         self.cont = 0
