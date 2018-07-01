@@ -1,3 +1,6 @@
+from ClaseContacto import *
+
+
 def str2num(key):
   return sum([ord(c) for c in key])
 

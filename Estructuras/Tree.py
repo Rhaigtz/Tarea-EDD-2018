@@ -78,27 +78,30 @@ class Node:
                 if list[i].apellido > list[x].apellido:
                     list[i], list[x] = list[x], list[i]
 	# Busca un item en el arbol y lo retorna siesque lo encuentra, en caso contrario retorna False
-    def _find(self, item):
-    	if item in self.data:
-    		return item
-    	elif self._is_leaf():
+
+    def _find(self, apellido):
+    	for i in self.data:
+            if apellido in i.apellido:
+                print(apellido)
+                return apellido
+    	if self._is_leaf():
     		return False
-    	elif item > self.data[-1]:
-    		return self.child[-1]._find(item)
+    	elif apellido > self.data[-1].apellido:
+    		return self.child[-1]._find(apellido)
     	else:
     		for i in range(len(self.data)):
-    			if item < self.data[i]:
-    				return self.child[i]._find(item)
+    			if apellido < self.data[i].apellido:
+    				return self.child[i]._find(apellido)
 
     def _remove(self, item):
     	pass
 
 	# Imprime en pre-order
     def _preorder(self):
-        print(self)
+    	for i in self.data:
+            print(i.Imprimir())
     	for child in self.child:
             child._preorder()
-
         
 
 
@@ -122,11 +125,23 @@ class Tree:
     def remove(self, item):
         pass
 
-    def find(self, item):
-        return self.root._find(item)
+    def find(self, apellido):
+        return self.root._find(apellido)
 
     def pre_order(self):
         self.root._preorder()
+
+    def agregarContacto(self):
+        print("Agregar nombre: ")
+        nombre = input()
+        print("Agregar apellido: ")
+        apellido = input()
+        print("Agregar telefono: ")
+        telefono = input()
+        print("Agregar email: ")
+        email = input()
+        nuevo = Contacto(nombre, apellido, telefono, email)
+        return self.insert(nuevo)
 if __name__ == "__main__":
     contacto = Contacto("Nicolas", "Opazo", 4319413, "dasads")
     contacto2 = Contacto("Luis","Apaza",41242112,"dasdsa")
@@ -135,8 +150,11 @@ if __name__ == "__main__":
     contacto6 = Contacto("Bastian","Navarro",243894231,"dsakjdsa")
     arbol = Tree()
     arbol.insert(contacto)
-    arbol.insert(contacto3)
     arbol.insert(contacto2)
+    arbol.insert(contacto3)
     arbol.insert(contacto5)
     arbol.insert(contacto6)
-    arbol.pre_order()
+    arbol.find("Opazo")
+    arbol.find("Apaza")
+    arbol.find("pedrito")
+    arbol.find("Navarro")

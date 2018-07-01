@@ -1,6 +1,7 @@
 from ListaC import *
 from ArbolBinario import *
 from AVL2 import *
+from Tree import *
 from faker import Faker
 from time import time
 class Menu:
@@ -8,14 +9,16 @@ class Menu:
         self.cont = 0
 
 
-    def Inicio(self,lista,abb,avl):
+    def Inicio(self,lista,abb,avl,tree):
         lista = List()
         abb = ABB()
         avl = AVLTree()
+        tree = Tree()
         print("Bienvenido a su lista de contactos \nIngrese la lista que desee implementar en sus Contactos")
         print("1. Lista de Contacto")
         print("2. Arbol Binario")
         print("3. AVL")
+        print("4. 2_3 Tree")
         op=int(input("Ingrese opcion: "))
         if op==1:
             self.Lista()
@@ -24,7 +27,7 @@ class Menu:
         elif op==3:
             self.AVLtree()
         elif op==4:
-            self.Arbolito23()
+            self.Trees()
         elif op==5:
             self.Hashing()
         else:
@@ -157,11 +160,46 @@ class Menu:
         else:
             print("Opcion no valida, por favor ingresar opción valida.")
             self.AVLtree()
+    
+    def Trees(self):
+        print("Ha ingresado la lista de contactos, ingrese su opción")
+        print("1. Ingresar")
+        print("3. Desplegar Contactos")
+        print("0. Volver al Menu Anterior")
+
+        op = int(input("Ingrese opcion: "))
+        if op == 1:
+            tree.agregarContacto()
+            self.cont += 1
+            self.Trees()
+
+        elif op == 3:
+            tree.pre_order()
+            self.Trees()
+
+        elif op == 0:
+            print("¿ Esta seguro de eliminar la estructura de datos ?")
+            print("1.Si \n2.No")
+            aux = int(input("Ingrese opcion: "))
+            if aux == 1:
+                self.Trees()
+
+            elif aux == 2:
+                print("Reiniciar Menu de Lista\n")
+                self.Trees()
+            else:
+                print("Opcion no valida, por favor ingrese valores correctos")
+                self.Trees()
+
+        else:
+            print("Opcion no valida, por favor ingresar opción valida.")
+            self.Trees()
    
 if __name__ == "__main__":
     menu = Menu()
     lista = List()
     abb = ABB()
     avl = AVLTree()
-    menu.Inicio(lista,abb,avl)
+    tree = Tree()
+    menu.Inicio(lista,abb,avl,tree)
 

@@ -132,7 +132,7 @@ class AVLTree():
         # debug("Trying to delete at node: " + str(self.node.key))
         if self.node != None:
             if self.node.key.apellido == apellido:
-                debug("Deleting ... " + str(key.apellido))
+                debug("Deleting ... " + str(apellido))
                 if self.node.left.node == None and self.node.right.node == None:
                     self.node = None  # leaves can be killed at will
                 # if only one subtree, take that
@@ -154,10 +154,10 @@ class AVLTree():
 
                 self.rebalance()
                 return
-            elif key.apellido < self.node.key.apellido:
-                self.node.left.delete(key)
-            elif key.apellido > self.node.key.apellido:
-                self.node.right.delete(key)
+            elif apellido < self.node.key.apellido:
+                self.node.left.delete(apellido)
+            elif apellido > self.node.key.apellido:
+                self.node.right.delete(apellido)
 
             self.rebalance()
         else:
@@ -252,6 +252,6 @@ if __name__ == "__main__":
     avl.insert(contacto4)
     avl.insert(contacto5)
     avl.pre_order(avl.node)
-    avl.delete(contacto2)
+    avl.delete("Apaza")
     avl.pre_order(avl.node)
 

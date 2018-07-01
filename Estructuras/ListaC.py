@@ -1,4 +1,5 @@
 from ClaseContacto import *
+from time import time
 #El nodo almacena la clase contacto
 class Node:
     def __init__(self, data):
@@ -31,6 +32,7 @@ class List:
         while aux:
             if aux.data.apellido == apellido:
                 print("El contacto fue encontrado en el nodo numero {} ".format(i))
+                return True
                 break
             else:
                 aux = aux.next_node
@@ -40,6 +42,9 @@ class List:
                     break
 
     def sortedInsert(self, contact):
+        if self.buscar(contact.apellido) is True:
+            return "El contacto ya se encuentra registrado"
+        else:
             NodoContacto = Node(contact)
             # Special case for the empty linked list
             if self.head is None:
@@ -87,14 +92,25 @@ class List:
     def borrarContacto(self):
         print("Ingrese el Apellido del contacto que desea eliminar:")
         apellido = input()
-if __name__ == "__main__":
 
-    contacto = Contacto("Nicolas", "Opazo", 4319413, "dasads")
-    contacto2 = Contacto("Luis", "Apaza", 41242112, "dasdsa")
-    contacto3 = Contacto("rodrigo", "villanueva", 4321431, "fdsafadfa")
-    contacto5 = Contacto("dassjkkj", "Gonzales", 214414, "faskjfs")
-    contacto6 = Contacto("Bastian", "Navarro", 243894231, "dsakjdsa")
-    lista=List()
-    lista.sortedInsert(contacto)
-    lista.sortedInsert(contacto2)
-    lista.borrar("Opazo")
+    def ingresarNContactos(self, n):
+        from faker import Faker
+        from random import randint
+        fake = Faker()
+        inicio = time()
+        for i in range(0, n):
+            x = fake.name()
+            y = x.split()
+            email = fake.email()
+            telefono = str(randint(11111111, 99999999))
+            nuevo = Contacto(y[0], y[1], telefono, email)
+            self.sortedInsert(nuevo)
+        termino = time()
+        print(termino-inicio)
+        
+if __name__ == "__main__":
+    lista2= List()
+    lista2.ingresarNContactos(1000)
+    tiempo1 = time()
+    lista2.print_list()
+    print(time()-tiempo1)
