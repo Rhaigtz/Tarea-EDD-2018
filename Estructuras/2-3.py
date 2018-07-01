@@ -24,9 +24,11 @@ class Node:
         self.child.extend(new_node.child)
         if len(self.child) > 1:
                 for x in range(0, len(self.child)):
-                    for j in range(x+1, len(self.child)):
-                        if self.child[j].apellido > self.child[x].value.apellido:
-                            self.child[j], self.child[x] = self.child[x], self.child[j]
+                    for i in range(0, len(self.child[x].data)):
+                        for j in range(x+1, len(self.child[x].data)):
+                            if self.child[x].data[j].apellido > self.child[x].data[i].apellido:
+                                self.child[x].data[j], self.child[x].data[i] = self.child[x].data[i], self.child[x].data[j]
+                         
         if len(self.data) > 2:
             self._split()
 
@@ -93,9 +95,11 @@ class Node:
 
 	# Imprime en pre-order
     def _preorder(self):
-    	print(self)
+        print(self)
     	for child in self.child:
             child._preorder()
+
+        
 
 
 class Tree:
@@ -135,4 +139,4 @@ if __name__ == "__main__":
     arbol.insert(contacto2)
     arbol.insert(contacto5)
     arbol.insert(contacto6)
-
+    arbol.pre_order()
