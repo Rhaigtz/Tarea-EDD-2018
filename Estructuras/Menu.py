@@ -16,8 +16,6 @@ class Menu:
         print("1. Lista de Contacto")
         print("2. Arbol Binario")
         print("3. AVL")
-        print("4. Arbol_2_3")
-        print("5. Hashing")
         op=int(input("Ingrese opcion: "))
         if op==1:
             self.Lista()
@@ -62,7 +60,6 @@ class Menu:
             print("1.Si \n2.No")
             aux = int(input("Ingrese opcion: "))
             if aux == 1:
-                self.head = None
                 self.Inicio()
 
             elif aux==2:
@@ -105,7 +102,6 @@ class Menu:
             print("1.Si \n2.No")
             aux = int(input("Ingrese opcion: "))
             if aux == 1:
-                self.head = None
                 self.ArbolBinario()
 
             elif aux==2:
@@ -149,7 +145,6 @@ class Menu:
             print("1.Si \n2.No")
             aux = int(input("Ingrese opcion: "))
             if aux == 1:
-                self.head = None
                 self.AVLtree()
 
             elif aux==2:
