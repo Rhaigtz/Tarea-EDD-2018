@@ -240,6 +240,7 @@ class AVLTree():
 
     def _find(self, apellido, node):
         if node == None:
+            print("El contacto no se encuentra en la lista.")
             return None
         elif apellido == node.key.apellido:
             print(node.key.apellido)

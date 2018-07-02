@@ -79,9 +79,12 @@ class Node:
     def _find(self, apellido):
     	for i in self.data:
             if apellido in i.apellido:
+                print("El contacto fue encontrado en la estructura")
                 return apellido
     	if self._is_leaf():
-    		return False
+            print("No se encontro el contacto")
+            
+            return False
     	elif apellido > self.data[-1].apellido:
     		return self.child[-1]._find(apellido)
     	else:

@@ -39,8 +39,10 @@ class ABB:
 
     def _find(self, apellido, node):
         if node == None:
-            return 
+            print("No se encontro el contacto.")
+            return None
         elif apellido == node.value.apellido:
+            print("El contacto fue encontrado en la estructura.")
             return node
         elif apellido < node.value.apellido and node.left != None:
             return self._find(apellido, node.left)
@@ -114,8 +116,7 @@ class ABB:
             pass
         else:
             self.in_order(node.left)
-            print("Nombre:  {} Apellido: {} Numero: {} y Email: {} ".format(
-                 node.value.nombre, node.value.apellido, node.value.telefono, node.value.mail))
+            print(node.value.Imprimir())
             self.in_order(node.right)
 
     def post_order(self, node): #Implementar
@@ -132,8 +133,7 @@ class ABB:
         if node==None:
             pass
         else:
-            print("Nombre:  {} Apellido: {} Numero: {} y Email: {} ".format(
-                node.value.nombre, node.value.apellido, node.value.telefono, node.value.mail))
+            print(node.value.Imprimir())
             self.pre_order(node.left)
             self.pre_order(node.right)
 

@@ -4,6 +4,7 @@ from AVL2 import *
 from Tree import *
 from faker import Faker
 from time import time
+from Hash import *
 class Menu:
     def __init__(self):
         self.cont = 0
@@ -87,6 +88,7 @@ class Menu:
         print("1. Ingresar")
         print("2. Eliminar")
         print("3. Desplegar Contactos")
+        print("4. Buscar Contacto")
         print("0. Volver al Menu Anterior")
 
         op=int(input("Ingrese opcion: "))
@@ -135,6 +137,7 @@ class Menu:
         print("1. Ingresar")
         print("2. Eliminar")
         print("3. Desplegar Contactos")
+        print("4. Buscar Contacto")
 
         print("0. Volver al Menu Anterior")
 
@@ -183,6 +186,7 @@ class Menu:
         print("Ha ingresado la lista de contactos, ingrese su opción")
         print("1. Ingresar")
         print("3. Desplegar Contactos")
+        print("4. Buscar Contacto")
         print("0. Volver al Menu Anterior")
 
         op = int(input("Ingrese opcion: "))
@@ -194,7 +198,11 @@ class Menu:
         elif op == 3:
             tree.pre_order()
             self.Trees()
-
+        elif op == 4:
+            print("Ingrese el Apellido del contacto a buscar")
+            apellido = input()
+            tree.find(apellido)
+            self.Trees()
         elif op == 0:
             print("¿ Esta seguro de eliminar la estructura de datos ?")
             print("1.Si \n2.No")
@@ -212,9 +220,45 @@ class Menu:
         else:
             print("Opcion no valida, por favor ingresar opción valida.")
             self.Trees()
+
+    def hash(self):
+        print("Ha ingresado la lista de contactos, ingrese su opción")
+        print("1. Ingresar")
+        print("4. Buscar Contacto")
+        print("0. Volver al Menu Anterior")
+
+        op = int(input("Ingrese opcion: "))
+        if op == 1:
+            h.agregarContacto()
+            self.cont += 1
+            self.hash()
+        elif op == 4:
+            print("Ingrese el Apellido del contacto a buscar")
+            apellido = input()
+            h.get(apellido)
+            self.hash()
+        elif op == 0:
+            print("¿ Esta seguro de eliminar la estructura de datos ?")
+            print("1.Si \n2.No")
+            aux = int(input("Ingrese opcion: "))
+            if aux == 1:
+                self.hash()
+
+            elif aux == 2:
+                print("Reiniciar Menu de Lista\n")
+                self.hash()
+            else:
+                print("Opcion no valida, por favor ingrese valores correctos")
+                self.hash()
+
+        else:
+            print("Opcion no valida, por favor ingresar opción valida.")
+            self.hash()
+
    
 if __name__ == "__main__":
     menu = Menu()
+    h = hash(100)
     lista = List()
     abb = ABB()
     avl = AVLTree()

@@ -1,5 +1,6 @@
 from ClaseContacto import *
-
+from faker import Faker
+from time import time
 
 def str2num(key):
   return sum([ord(c) for c in key])
@@ -31,20 +32,28 @@ class hash:
   def get(self,key):
     for e in self.list[hashstr(key,self.size)]:
       if e[0] is key:
+        print(time()-x)
         return e[1]
 
-h = hash(10)
-h.put("fruta","<img src='http://www.sportlife.es/media/cache/frontend_grande/upload/images/article/16246/article-mejor-tomar-fruta-ayunas-5a4b758d800d3.jpg' width=100/>")
-h.put("verdura","<img src='https://biotrendies.com/wp-content/uploads/2016/08/verduras-con-mas-vitamina-c.jpg' width=100/>")
-h.put("chatarra","<img src='https://metalurgia.cloudingenium.com/wp-content/uploads/sites/12/2012/08/Transformacion-Puebla-Compra-de-chatarra-de-aluminio1.jpg' width=100/>")
-h.put("chatarra","<img src='http://culturizando.com/wp-content/uploads/2016/11/thumb_600x0_Comida-rapida.png' width=100/>")
-h.put("mesa","<img src='https://www.ikea.com/es/es/images/products/morbylanga-mesa__0533580_PE648686_S4.JPG' width=100/>")
-h.put("same","<img src='http://www.corporate-eye.com/main/wp-content/uploads/2011/09/same-stripe.jpg' width=100/>")
-h.put("mase","<img src='http://www.gstatic.com/tv/thumb/persons/914646/914646_v9_ba.jpg' width=100/>")
+  def ingresarNContactos(self, n):
+        from random import randint
+        fake = Faker()
+        inicio = time()
+        for i in range(0, n):
+            x = fake.name()
+            y = x.split()
+            email = fake.email()
+            telefono = str(randint(11111111, 99999999))
+            nuevo = Contacto(y[0], y[1], telefono, email)
+            self.put(nuevo.apellido,nuevo)
+        termino = time()
+        print(termino-inicio)
 
-print(h.get("fruta")+"<br>")
-print(h.get("verdura")+"<br>")
-print(h.get("chatarra")+"<br>")
-print(h.get("mesa")+"<br>")
-print(h.get("same")+"<br>")
-print(h.get("mase")+"<br>")
+if __name__ == "__main__":
+
+  fake = Faker() 
+  h = hash(150)
+  h.ingresarNContactos(10)
+  x = time()
+  h.get(fake.name().split()[1])
+  print(time()-x)
