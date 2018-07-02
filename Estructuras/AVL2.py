@@ -1,4 +1,6 @@
 from ClaseContacto import *
+from faker import Faker
+from time import time
 outputdebug = False
 
 
@@ -23,6 +25,9 @@ class AVLTree():
         if len(args) == 1:
             for i in args[0]:
                 self.insert(i)
+
+    def empty(self):
+        return self.node == None
 
     def height(self):
         if self.node:
@@ -146,7 +151,7 @@ class AVLTree():
                     replacement = self.logical_successor(self.node)
                     if replacement != None:  # sanity check
                         debug("Found replacement for " + str(key.apellido) +
-                              " -> " + str(replacement.key.apellido))
+                              " -> " + str(replacement))
                         self.node.key = replacement.key
 
                         # replaced. Now delete the key from right child
@@ -226,6 +231,24 @@ class AVLTree():
                 print("Nombre:  {} Apellido: {} Numero: {} y Email: {} ".format(
                     nodo.key.nombre, nodo.key.apellido, nodo.key.telefono, nodo.key.mail))
                 self.pre_order(nodo.right.node)
+
+    def find(self, apellido):
+        if self.empty():
+            return None
+        else:
+            return self._find(apellido, self.node)
+
+    def _find(self, apellido, node):
+        if node == None:
+            return None
+        elif apellido == node.key.apellido:
+            print(node.key.apellido)
+        elif apellido < node.key.apellido and node.left != None:
+            return self._find(apellido, node.left.node)
+        elif apellido > node.key.apellido and node.right != None:
+            return self._find(apellido, node.right.node)
+
+
     def agregarContacto(self):
         print("Agregar nombre: ")
         nombre = input()
@@ -238,20 +261,28 @@ class AVLTree():
         nuevo = Contacto(nombre, apellido, telefono, email)
         return self.insert(nuevo)
 
+    def ingresarNContactos(self, n):
+        from random import randint
+        fake = Faker()
+        inicio = time()
+        for i in range(0, n):
+            x = fake.name()
+            y = x.split()
+            email = fake.email()
+            telefono = str(randint(11111111, 99999999))
+            nuevo = Contacto(y[0], y[1], telefono, email)
+            self.insert(nuevo)
+        termino = time()
+        print(termino-inicio)
 
 if __name__ == "__main__":
-    contacto = Contacto("Nicolas", "Opazo", 4319413, "dasads")
-    contacto2 = Contacto("Luis", "Apaza", 41242112, "dasdsa")
-    contacto3 = Contacto("rodrigo", "villanueva", 4321431, "fdsafadfa")
-    contacto4 = Contacto("dassjkkj", "Gonzales", 214414, "faskjfs")
-    contacto5 = Contacto("Bastian", "Navarro", 243894231, "dsakjdsa")
-    avl=AVLTree()
-    avl.insert(contacto)
-    avl.insert(contacto2)
-    avl.insert(contacto3)
-    avl.insert(contacto4)
-    avl.insert(contacto5)
-    avl.pre_order(avl.node)
-    avl.delete("Apaza")
-    avl.pre_order(avl.node)
 
+    fake = Faker()
+    lista= AVLTree()  
+    lista.ingresarNContactos(1000)
+    tiempo1 = time()
+    lista.delete(fake.name().split()[1])
+    print(time()-tiempo1)
+    tiempo2 = time()
+    lista.find(fake.name().split()[1])
+    print(time()-tiempo2)

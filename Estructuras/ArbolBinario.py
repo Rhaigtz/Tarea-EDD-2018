@@ -1,4 +1,6 @@
 from ClaseContacto import *
+from faker import Faker
+from time import time
 class Node:
     def __init__(self, value):
         self.left = None
@@ -37,12 +39,12 @@ class ABB:
 
     def _find(self, apellido, node):
         if node == None:
-            return None
+            return 
         elif apellido == node.value.apellido:
             return node
         elif apellido < node.value.apellido and node.left != None:
             return self._find(apellido, node.left)
-        elif apellido > node.value.apellido and node.right != none:
+        elif apellido > node.value.apellido and node.right != None:
             return self._find(apellido, node.right)
 
     def find(self, apellido):
@@ -57,6 +59,9 @@ class ABB:
         return self.delete_node(self.find(apellido))
 
     def delete_node(self, node):
+        if node == None:
+            print("El contacto no existe")
+            return False
         def min_value_node(n):
             current = n
             while current.left != None:
@@ -100,8 +105,8 @@ class ABB:
             successor = min_value_node(node.right) # Get the inorder successor of the deleted node
             node.value.apellido = successor.value.apellido # Copy the value
             node.value.nombre = successor.value.nombre
-            node.value.mail = succesor.value.mail
-            node.value.telefono=succesor.value.telefono
+            node.value.mail = successor.value.mail
+            node.value.telefono=successor.value.telefono
             self.delete_node(successor)
 
     def in_order(self, node): #Implementar
@@ -193,18 +198,27 @@ class ABB:
         nuevo = Contacto(nombre, apellido, telefono, email)
         return self.insert(nuevo)
 
+    def ingresarNContactos(self, n):
+        from random import randint
+        fake = Faker()
+        inicio = time()
+        for i in range(0, n):
+            x = fake.name()
+            y = x.split()
+            email = fake.email()
+            telefono = str(randint(11111111, 99999999))
+            nuevo = Contacto(y[0], y[1], telefono, email)
+            self.insert(nuevo)
+        termino = time()
+        print(termino-inicio)
+
 if __name__=="__main__":
-    contacto = Contacto("Nicolas", "Opazo", 4319413, "dasads")
-    contacto2 = Contacto("Luis","Apaza",41242112,"dasdsa")
-    contacto3 = Contacto("rodrigo","villanueva",4321431,"fdsafadfa")
-    contacto5 = Contacto("dassjkkj","Gonzales",214414,"faskjfs")
-    contacto6 = Contacto("Bastian","Navarro",243894231,"dsakjdsa")
-    arbol = ABB()
-    arbol.insert(contacto)
-    arbol.insert(contacto2)
-    arbol.insert(contacto3)
-    arbol.insert(contacto5)
-    arbol.insert(contacto6)
-    arbol.pre_order(arbol.root)
-    arbol.in_order(arbol.root)
-    arbol.post_order(arbol.root)
+    fake = Faker()
+    lista = ABB()
+    lista.ingresarNContactos(1000)
+    tiempo1 = time()
+    lista.delete(fake.name().split()[1])
+    print(time()-tiempo1)
+    tiempo2 = time()
+    lista.find(fake.name().split()[1])
+    print(time()-tiempo2)

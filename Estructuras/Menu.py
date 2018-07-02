@@ -39,6 +39,7 @@ class Menu:
         print("1. Ingresar")
         print("2. Eliminar")
         print("3. Desplegar Contactos")
+        print("4. Buscar Contacto")
         print("0. Volver al Menu Anterior")
 
         op=int(input("Ingrese opcion: "))
@@ -55,9 +56,14 @@ class Menu:
             self.Lista()
 
         elif op==3:
-                lista.print_list()
-                self.Lista()
+            lista.print_list()
+            self.Lista()
 
+        elif op==4:
+            print("Ingrese el Apellido del contacto a buscar")
+            apellido = input()
+            lista.buscar(apellido)
+            self.Lista()
         elif op==0:
             print("¿ Esta seguro de eliminar la estructura de datos ?")
             print("1.Si \n2.No")
@@ -97,9 +103,14 @@ class Menu:
             self.ArbolBinario()
 
         elif op==3:
-                abb.in_order(abb.root)
-                self.ArbolBinario()
+            abb.in_order(abb.root)
+            self.ArbolBinario()
 
+        elif op == 4:
+            print("Ingrese el Apellido del contacto a buscar")
+            apellido = input()
+            abb.find(apellido)
+            self.ArbolBinario()
         elif op==0:
             print("¿ Esta seguro de eliminar la estructura de datos ?")
             print("1.Si \n2.No")
@@ -124,6 +135,7 @@ class Menu:
         print("1. Ingresar")
         print("2. Eliminar")
         print("3. Desplegar Contactos")
+
         print("0. Volver al Menu Anterior")
 
         op=int(input("Ingrese opcion: "))
@@ -142,6 +154,12 @@ class Menu:
         elif op==3:
             avl.pre_order(avl.node)
             self.AVLtree()
+        
+        elif op == 4:
+            print("Ingrese el Apellido del contacto a buscar")
+            apellido = input()
+            avl.find(apellido)
+            self.Lista()
 
         elif op==0:
             print("¿ Esta seguro de eliminar la estructura de datos ?")

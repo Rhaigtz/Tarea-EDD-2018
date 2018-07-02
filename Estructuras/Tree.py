@@ -1,4 +1,6 @@
 from ClaseContacto import *
+from faker import Faker
+from time import time
 class Node:
     def __init__(self, value):
         self.data = [value]
@@ -72,17 +74,11 @@ class Node:
         else:
         	left_child.parent = self
         	right_child.parent = self
-    def Ordenamiento(self,list):
-        for x in xrange(0, len(list)):
-            for i in xrange(x+1, len(list)):
-                if list[i].apellido > list[x].apellido:
-                    list[i], list[x] = list[x], list[i]
 	# Busca un item en el arbol y lo retorna siesque lo encuentra, en caso contrario retorna False
 
     def _find(self, apellido):
     	for i in self.data:
             if apellido in i.apellido:
-                print(apellido)
                 return apellido
     	if self._is_leaf():
     		return False
@@ -93,7 +89,7 @@ class Node:
     			if apellido < self.data[i].apellido:
     				return self.child[i]._find(apellido)
 
-    def _remove(self, item):
+    def _remove(self, apellido):
     	pass
 
 	# Imprime en pre-order
@@ -122,8 +118,8 @@ class Tree:
                 self.root = self.root.parent
         return True
 
-    def remove(self, item):
-        pass
+    def remove(self, apellido):
+        return self.root._remove(apellido)
 
     def find(self, apellido):
         return self.root._find(apellido)
@@ -142,19 +138,26 @@ class Tree:
         email = input()
         nuevo = Contacto(nombre, apellido, telefono, email)
         return self.insert(nuevo)
+
+    def ingresarNContactos(self, n):
+        from random import randint
+        fake = Faker()
+        inicio = time()
+        for i in range(0, n):
+            x = fake.name()
+            y = x.split()
+            email = fake.email()
+            telefono = str(randint(11111111, 99999999))
+            nuevo = Contacto(y[0], y[1], telefono, email)
+            self.insert(nuevo)
+        termino = time()
+        print(termino-inicio)
 if __name__ == "__main__":
-    contacto = Contacto("Nicolas", "Opazo", 4319413, "dasads")
-    contacto2 = Contacto("Luis","Apaza",41242112,"dasdsa")
-    contacto3 = Contacto("rodrigo","villanueva",4321431,"fdsafadfa")
-    contacto5 = Contacto("dassjkkj","Gonzales",214414,"faskjfs")
-    contacto6 = Contacto("Bastian","Navarro",243894231,"dsakjdsa")
-    arbol = Tree()
-    arbol.insert(contacto)
-    arbol.insert(contacto2)
-    arbol.insert(contacto3)
-    arbol.insert(contacto5)
-    arbol.insert(contacto6)
-    arbol.find("Opazo")
-    arbol.find("Apaza")
-    arbol.find("pedrito")
-    arbol.find("Navarro")
+    fake = Faker()
+    lista= Tree()  
+    lista.ingresarNContactos(1000)
+    tiempo2 = time()
+    lista.find(fake.name().split()[1])
+    print(time()-tiempo2)
+
+

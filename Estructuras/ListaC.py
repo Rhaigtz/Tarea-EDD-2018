@@ -1,5 +1,6 @@
 from ClaseContacto import *
 from time import time
+from faker import Faker
 #El nodo almacena la clase contacto
 class Node:
     def __init__(self, data):
@@ -16,7 +17,7 @@ class List:
     def borrar(self,apellido):
         if self.head.data.apellido == apellido:
             self.head = self.head.next_node
-            pass
+            return apellido
         aux = self.head
         while aux.next_node:
             if aux.next_node.data.apellido == apellido:
@@ -38,12 +39,12 @@ class List:
                 aux = aux.next_node
                 i+=1
                 if aux is None:
-                    print("El contacto no se encuentra registrado en la lista")
+                    return False
                     break
 
     def sortedInsert(self, contact):
         if self.buscar(contact.apellido) is True:
-            return "El contacto ya se encuentra registrado"
+            return True
         else:
             NodoContacto = Node(contact)
             # Special case for the empty linked list
@@ -89,12 +90,8 @@ class List:
         nuevo = Contacto(nombre, apellido, telefono, email)
         return self.sortedInsert(nuevo)
 
-    def borrarContacto(self):
-        print("Ingrese el Apellido del contacto que desea eliminar:")
-        apellido = input()
 
     def ingresarNContactos(self, n):
-        from faker import Faker
         from random import randint
         fake = Faker()
         inicio = time()
@@ -109,8 +106,12 @@ class List:
         print(termino-inicio)
         
 if __name__ == "__main__":
-    lista2= List()
-    lista2.ingresarNContactos(1000)
+    fake = Faker()
+    lista= List()  
+    lista.ingresarNContactos(1000)
     tiempo1 = time()
-    lista2.print_list()
+    lista.borrar(fake.name().split()[1])
     print(time()-tiempo1)
+    tiempo2 = time()
+    lista.buscar(fake.name().split()[1])
+    print(time()-tiempo2)
